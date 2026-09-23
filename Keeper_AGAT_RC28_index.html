@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Keeper × AGAT | Executive Mission Control</title>
+<meta name="description" content="Keeper external enterprise assessment rehearsal for AGAT Laboratories." />
+<style>
+:root{
+ --bg:#07100f;--bg-soft:#0a1714;--panel:#0e211c;--panel-2:#102820;--panel-3:#153129;
+ --ink:#f4f8f6;--muted:#98ada6;--line:#28483f;--line2:#3a6257;
+ --mint:#5ee5bd;--mint2:#2ba37f;--cyan:#75d8e7;--gold:#e3bd72;--red:#e67f78;--blue:#72a9ff;
+ --radius:18px;--shadow:0 22px 65px rgba(0,0,0,.28);--shadow-sm:0 12px 30px rgba(0,0,0,.16);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 86% 8%,rgba(94,229,189,.09),transparent 28%),radial-gradient(circle at 18% 0%,rgba(117,216,231,.05),transparent 26%),linear-gradient(180deg,#050c0b,#07120f 45%,#07100f);color:var(--ink);font:14px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+a{color:inherit}.app{display:grid;grid-template-columns:268px minmax(0,1fr);min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;padding:26px 20px;border-right:1px solid rgba(84,133,120,.25);background:linear-gradient(180deg,rgba(7,18,15,.98),rgba(5,13,11,.98));z-index:50}
+.brand-row{display:flex;align-items:center;gap:11px}.brandmark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(94,229,189,.18),rgba(117,216,231,.04));border:1px solid rgba(94,229,189,.35);box-shadow:inset 0 0 30px rgba(94,229,189,.04)}.brandmark b{font-size:14px;color:var(--mint)}
+.brand-copy b{display:block;font-size:12px;letter-spacing:.17em}.brand-copy span{font-size:10px;color:var(--muted)}
+.sidebar nav{display:grid;gap:5px;margin-top:30px}.sidebar a{position:relative;text-decoration:none;padding:10px 12px 10px 14px;border-radius:10px;color:#a6bbb5;border:1px solid transparent;transition:.18s}.sidebar a:before{content:"";position:absolute;left:4px;top:50%;transform:translateY(-50%);width:3px;height:0;border-radius:4px;background:var(--mint);transition:.18s}.sidebar a:hover,.sidebar a.active{background:rgba(94,229,189,.055);border-color:rgba(94,229,189,.11);color:#fff}.sidebar a.active:before{height:18px}
+.side-status{margin-top:24px;padding:14px;border-radius:13px;border:1px solid rgba(94,229,189,.14);background:rgba(94,229,189,.035)}.side-status .row{display:flex;justify-content:space-between;gap:10px;font-size:10px;color:var(--muted);margin:7px 0}.side-status .row b{color:#d6e7e1;font-size:10px}.sidebar .foot{position:absolute;left:20px;right:20px;bottom:18px;font-size:9px;line-height:1.5;color:#688078}
+.main{min-width:0}.topbar{position:sticky;top:0;z-index:40;height:68px;padding:0 34px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,16,13,.84);backdrop-filter:blur(18px);border-bottom:1px solid rgba(84,133,120,.22)}
+.top-left{display:flex;align-items:center;gap:10px}.top-left b{font-size:13px}.chip{font-size:9px;letter-spacing:.11em;text-transform:uppercase;border:1px solid rgba(94,229,189,.24);border-radius:999px;padding:4px 8px;color:#c6eadf;background:rgba(94,229,189,.04)}.top-right{display:flex;align-items:center;gap:12px;color:#8fa69f;font-size:10px}.live-dot{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 18px rgba(94,229,189,.65)}
+.wrap{max-width:1320px;margin:auto;padding:34px 42px 84px}.eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:900;color:var(--mint)}
+h1{font-size:clamp(46px,6vw,84px);line-height:.94;letter-spacing:-.06em;margin:12px 0 18px}h2{font-size:clamp(30px,3vw,44px);line-height:1.03;letter-spacing:-.045em;margin:0 0 12px}h3{font-size:16px;margin:0 0 8px;letter-spacing:-.02em}p{margin:0}.lead{font-size:19px;line-height:1.5;color:#c5d6d0;max-width:760px}
+.hero{min-height:640px;display:grid;grid-template-columns:minmax(0,1.06fr) minmax(400px,.94fr);gap:42px;align-items:center;padding:42px 0 30px}.hero-actions{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}.btn{appearance:none;border:1px solid #365b51;background:transparent;color:#dcebe6;border-radius:10px;padding:10px 13px;font-weight:800;font-size:11px;cursor:pointer;transition:.16s}.btn:hover{transform:translateY(-1px);border-color:#548276}.btn.primary{background:linear-gradient(180deg,#68e9c3,#44c99f);color:#04110d;border-color:#78efca;box-shadow:0 9px 24px rgba(94,229,189,.16)}.btn.ghost{background:rgba(255,255,255,.02)}
+.hero-note{margin-top:24px;padding:15px 17px;border-radius:14px;border:1px solid rgba(94,229,189,.18);background:linear-gradient(180deg,rgba(94,229,189,.05),rgba(94,229,189,.02));display:flex;gap:12px}.hero-note .ic{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:rgba(94,229,189,.12);color:var(--mint);font-weight:900;flex:0 0 auto}.hero-note p{font-size:12px;color:#b7cac4}
+.visual{position:relative;min-height:490px;border-radius:26px;overflow:hidden;border:1px solid rgba(94,229,189,.17);background:radial-gradient(circle at 50% 48%,rgba(94,229,189,.1),transparent 30%),linear-gradient(145deg,rgba(16,38,33,.94),rgba(7,19,16,.92));box-shadow:var(--shadow)}.visual:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(94,229,189,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(94,229,189,.035) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(to bottom,black,transparent 90%)}
+.visual .label{position:absolute;top:18px;right:18px;font-size:9px;text-transform:uppercase;letter-spacing:.12em;border:1px solid rgba(94,229,189,.2);padding:6px 8px;border-radius:999px;color:#bfe8dd;background:rgba(5,18,15,.65)}
+.network-svg{position:absolute;inset:0;width:100%;height:100%}.network-svg .link{stroke:#3e6b5e;stroke-width:1.2;opacity:.52}.network-svg .pulse{stroke:var(--mint);stroke-width:1.5;opacity:.45;stroke-dasharray:6 8;animation:dash 12s linear infinite}.network-svg text{fill:#b9cec7;font-size:9px}.network-svg .node{fill:#0b1a17;stroke:#365e53;stroke-width:1.2}.network-svg .node.core{fill:#14362d;stroke:#61e7c0;stroke-width:1.5}.network-svg .node.hot{fill:#102820;stroke:#4fc8a2}.network-svg .tiny{fill:#6f8f86;font-size:7px}@keyframes dash{to{stroke-dashoffset:-120}}
+.hero-caption{position:absolute;left:20px;right:20px;bottom:18px;padding:12px 14px;border-radius:12px;border:1px solid rgba(94,229,189,.12);background:rgba(5,16,13,.7);backdrop-filter:blur(10px);font-size:10px;color:#8ea79f}.hero-caption b{color:#dcebe6}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0 48px}.metric{position:relative;min-height:118px;padding:19px;border-radius:16px;border:1px solid rgba(84,133,120,.34);background:linear-gradient(180deg,rgba(14,34,30,.9),rgba(8,22,19,.9));box-shadow:var(--shadow-sm);overflow:hidden}.metric:after{content:"";position:absolute;right:-24px;bottom:-24px;width:80px;height:80px;border-radius:50%;border:1px solid rgba(94,229,189,.08)}.metric .mini{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#729088}.metric b{display:block;font-size:32px;line-height:1;letter-spacing:-.05em;margin-top:8px}.metric span{display:block;color:var(--muted);font-size:11px;margin-top:8px;max-width:170px}
+.section{padding:42px 0 48px;border-top:1px solid rgba(84,133,120,.23)}.sectionhead{display:flex;justify-content:space-between;gap:30px;align-items:flex-end;margin-bottom:22px}.sectionhead p{max-width:640px;color:var(--muted)}
+.card{position:relative;padding:20px;border-radius:16px;border:1px solid rgba(84,133,120,.32);background:linear-gradient(180deg,rgba(13,31,27,.94),rgba(9,23,20,.96));box-shadow:var(--shadow-sm)}.card p{color:#b4c8c2}.tag{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:900;letter-spacing:.09em;text-transform:uppercase;padding:4px 8px;border-radius:999px;border:1px solid #315249;color:#bcd0ca;margin-bottom:10px}.tag:before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}.tag.good{color:var(--mint);border-color:rgba(94,229,189,.25)}.tag.open{color:var(--gold);border-color:rgba(227,189,114,.3)}.tag.stop{color:#f4a09b;border-color:rgba(230,127,120,.34)}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.flow-wrap{padding:20px;border:1px solid rgba(84,133,120,.3);border-radius:18px;background:linear-gradient(180deg,rgba(12,29,25,.92),rgba(8,21,18,.94));overflow:auto}.flow{display:grid;grid-template-columns:repeat(8,minmax(120px,1fr));gap:8px;min-width:980px}.flow .node{position:relative;min-height:94px;padding:14px 12px;border-radius:13px;border:1px solid rgba(84,133,120,.34);background:linear-gradient(180deg,rgba(16,39,34,.96),rgba(8,22,19,.96));display:flex;flex-direction:column;justify-content:space-between}.flow .node:not(:last-child):after{content:"→";position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:#56756d;z-index:2}.flow .node b{font-size:11px}.flow .node span{font-size:9px;color:#769087}.flow .node.hl{border-color:rgba(94,229,189,.42);box-shadow:inset 0 0 24px rgba(94,229,189,.04)}
+.chart-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.chart-card{padding:20px;border-radius:17px;border:1px solid rgba(84,133,120,.3);background:linear-gradient(180deg,rgba(14,33,29,.95),rgba(8,21,18,.96));box-shadow:var(--shadow-sm)}.chart-card h3{margin-bottom:12px}.chart-note{font-size:10px;color:#718c84;margin-top:10px}.bars{display:grid;gap:12px}.barrow{display:grid;grid-template-columns:160px 1fr 42px;align-items:center;gap:10px}.barrow span{font-size:10px;color:#9bb0aa}.track{height:8px;border-radius:999px;background:#10251f;overflow:hidden;border:1px solid rgba(84,133,120,.2)}.fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--mint),#88e9d0)}.barrow b{font-size:10px;text-align:right;color:#cfdfda}.donut-wrap{display:flex;align-items:center;gap:24px}.donut{width:144px;height:144px;border-radius:50%;background:conic-gradient(var(--mint) 0 64%,var(--gold) 64% 82%,#203b34 82% 100%);display:grid;place-items:center;position:relative;flex:0 0 auto}.donut:after{content:"";position:absolute;width:94px;height:94px;border-radius:50%;background:#0b1c18;border:1px solid rgba(84,133,120,.24)}.donut b{position:relative;z-index:2;font-size:28px;letter-spacing:-.05em}.legend{display:grid;gap:9px}.legend div{display:flex;align-items:center;gap:8px;font-size:10px;color:#9bb0aa}.swatch{width:8px;height:8px;border-radius:2px}.swatch.a{background:var(--mint)}.swatch.b{background:var(--gold)}.swatch.c{background:#203b34}
+.signals{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.signal{position:relative;min-height:198px;padding:20px;border-radius:16px;border:1px solid rgba(84,133,120,.32);background:linear-gradient(180deg,rgba(15,35,31,.96),rgba(8,21,18,.96));overflow:hidden}.signal .num{position:absolute;right:16px;top:10px;font-size:40px;font-weight:900;letter-spacing:-.08em;color:rgba(242,248,246,.035)}.signal p{color:#afc4bd}.signal .pulse-dot{width:9px;height:9px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 6px rgba(94,229,189,.07),0 0 24px rgba(94,229,189,.22);margin-bottom:17px}.signal:after{content:"";position:absolute;left:20px;right:20px;bottom:17px;height:2px;background:linear-gradient(90deg,var(--mint),rgba(94,229,189,.05));opacity:.44}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:16px}.side{overflow:hidden;border-radius:18px;border:1px solid rgba(84,133,120,.32);background:rgba(8,21,18,.78)}.side-head{padding:16px 18px;border-bottom:1px solid rgba(84,133,120,.23);display:flex;justify-content:space-between;background:rgba(12,30,26,.78)}.side-head b{font-size:13px}.side-head span{font-size:9px;color:#769087}.item{padding:18px;border-bottom:1px solid rgba(84,133,120,.18)}.item:last-child{border-bottom:0}.item p{color:#b2c6c0}.why{margin-top:9px;font-size:10px;color:#769087}.side.good{box-shadow:inset 3px 0 0 rgba(94,229,189,.6)}.side.rejected{box-shadow:inset 3px 0 0 rgba(230,127,120,.55)}
+.unknowns{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.unknown{padding:20px;border-radius:16px;border:1px dashed rgba(227,189,114,.35);background:linear-gradient(180deg,rgba(42,32,15,.16),rgba(12,25,21,.76))}.unknown .q{font-size:9px;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}.unknown p{color:#b7c9c3}
+.validation{display:grid;grid-template-columns:270px 1fr;gap:16px;align-items:start}.progress-card{position:sticky;top:90px;padding:20px;border-radius:18px;border:1px solid rgba(84,133,120,.32);background:linear-gradient(180deg,rgba(13,31,27,.94),rgba(8,21,18,.96));box-shadow:var(--shadow-sm)}.ring{--deg:0deg;width:132px;height:132px;margin:4px auto 18px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--mint) 0 var(--deg),#173129 var(--deg) 360deg);position:relative}.ring:after{content:"";position:absolute;width:90px;height:90px;border-radius:50%;background:#0b1c18;border:1px solid rgba(84,133,120,.24)}.ring b{position:relative;z-index:2;font-size:24px}.progress-card p{font-size:11px;color:#9db1ab;text-align:center}.progress-lines{margin-top:16px}.pl{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid rgba(84,133,120,.16);font-size:10px;color:#809990}.pl b{color:#cce0da}
+.question{padding:20px;border-radius:16px;border:1px solid rgba(84,133,120,.32);background:linear-gradient(180deg,rgba(13,31,27,.94),rgba(9,23,20,.96));margin-bottom:12px}.question>b{display:block;font-size:14px;line-height:1.45}.options{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}.result{margin-top:12px;padding:14px;border-radius:12px;border:1px solid rgba(84,133,120,.25);background:rgba(255,255,255,.018);color:#abc0b9}.small{font-size:10px;color:#718c84}
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.step{position:relative;min-height:138px;padding:18px;border-radius:15px;border:1px solid rgba(84,133,120,.3);background:linear-gradient(180deg,rgba(13,31,27,.94),rgba(8,21,18,.94))}.step:not(:last-child):after{content:"→";position:absolute;right:-8px;top:50%;transform:translateY(-50%);color:#56756d}.stepnum{font-size:9px;color:#6e8981;text-transform:uppercase;letter-spacing:.1em}.step b{display:block;margin:18px 0 8px;font-size:11px}.step span{font-size:10px;color:#8ea49d}.callout{margin-top:16px;padding:18px;border-radius:15px;border:1px solid rgba(94,229,189,.2);background:linear-gradient(180deg,rgba(94,229,189,.055),rgba(94,229,189,.025));color:#b9cdc7}.callout b{color:#eef8f5}
+.details-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}details{border:1px solid rgba(84,133,120,.3);border-radius:15px;background:linear-gradient(180deg,rgba(13,31,27,.92),rgba(8,21,18,.94));overflow:hidden}summary{cursor:pointer;padding:16px 18px;font-weight:800;list-style:none}summary::-webkit-details-marker{display:none}summary:after{content:"+";float:right;color:var(--mint)}details[open] summary:after{content:"–"}.detail-body{padding:0 18px 18px;color:#aebfb9;font-size:11px}.detail-body ul{padding-left:16px;margin:10px 0 0}.detail-body li{margin:5px 0}
+.footer{padding:30px 0 0;border-top:1px solid rgba(84,133,120,.22);font-size:10px;color:#698179}
+.mobile-toggle{display:none}
+@media(max-width:1080px){.app{grid-template-columns:1fr}.sidebar{display:none}.hero{grid-template-columns:1fr}.visual{min-height:420px}.metrics{grid-template-columns:repeat(2,1fr)}.signals{grid-template-columns:repeat(2,1fr)}.chart-grid,.split,.validation{grid-template-columns:1fr}.progress-card{position:relative;top:auto}.unknowns,.details-grid{grid-template-columns:1fr 1fr}.timeline{grid-template-columns:repeat(2,1fr)}.topbar{padding:0 22px}.wrap{padding:28px 24px 70px}}
+@media(max-width:680px){.wrap{padding:20px 16px 60px}.topbar{height:60px;padding:0 16px}.top-right{display:none}.hero{padding-top:22px;min-height:auto}.lead{font-size:16px}.visual{min-height:360px}.metrics,.signals,.unknowns,.details-grid,.timeline,.grid2,.grid3,.grid4{grid-template-columns:1fr}.sectionhead{display:block}.sectionhead p{margin-top:10px}.barrow{grid-template-columns:110px 1fr 34px}.donut-wrap{align-items:flex-start;flex-direction:column}.question{padding:17px}.options .btn{flex:1 1 calc(50% - 6px)}.flow-wrap{margin-left:-2px;margin-right:-2px}.hero-actions .btn{flex:1}.mobile-toggle{display:inline-flex}}
+
+/* RC25 VISUAL SYSTEM — AGAT-inspired without copying protected brand assets */
+:root{
+ --bg:#f3f4f1;--bg-soft:#eceee9;--panel:#ffffff;--panel-2:#f8f9f6;--panel-3:#eef1eb;
+ --ink:#171a18;--muted:#65706a;--line:#d9ded7;--line2:#c7cec6;
+ --mint:#f4df00;--mint2:#dbc800;--cyan:#89a9a0;--gold:#f4df00;--red:#b8564f;--blue:#547ad7;
+ --radius:18px;--shadow:0 18px 50px rgba(25,31,27,.08);--shadow-sm:0 9px 28px rgba(25,31,27,.065);
+}
+body{background:linear-gradient(180deg,#f5f6f3 0%,#eef0ec 100%);color:var(--ink)}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;background:
+ radial-gradient(circle at 15% 10%,rgba(244,223,0,.08),transparent 28%),
+ radial-gradient(circle at 90% 30%,rgba(0,0,0,.03),transparent 30%)}
+.sidebar{background:linear-gradient(180deg,#0b0e0c,#111511);border-right:0;box-shadow:10px 0 38px rgba(0,0,0,.07)}
+.brandmark{background:#f4df00;border:0;box-shadow:none}.brandmark b{color:#111}.brand-copy b{color:#fff}.brand-copy span{color:#929a95}
+.sidebar a{color:#aeb5b1}.sidebar a:hover,.sidebar a.active{background:rgba(244,223,0,.08);border-color:rgba(244,223,0,.12);color:#fff}.sidebar a.active:before{background:#f4df00}
+.side-status{border-color:rgba(244,223,0,.18);background:rgba(244,223,0,.04)}.side-status .row b{color:#fff}.sidebar .foot{color:#737c76}
+.topbar{background:rgba(250,251,248,.86);border-bottom:1px solid rgba(24,31,27,.08);box-shadow:0 6px 24px rgba(25,31,27,.04)}
+.top-left b{color:#1a1d1b}.chip{border-color:#ddd5a0;background:#fffbe3;color:#534c00}.top-right{color:#6d7772}.live-dot{background:#f4df00;box-shadow:0 0 0 4px rgba(244,223,0,.16)}
+.wrap{max-width:1380px}
+.eyebrow{color:#6d6500;letter-spacing:.16em}
+h1,h2,h3{color:#141715}
+.hero{min-height:650px;margin-top:18px;padding:52px 46px;border-radius:30px;background:
+ radial-gradient(circle at 17% 10%,rgba(244,223,0,.17),transparent 31%),
+ linear-gradient(135deg,#111613 0%,#171e19 58%,#0e120f 100%);box-shadow:0 28px 80px rgba(15,19,16,.16);overflow:hidden;position:relative}
+.hero:after{content:"";position:absolute;inset:auto -90px -100px auto;width:360px;height:360px;border-radius:50%;border:1px solid rgba(244,223,0,.12);box-shadow:0 0 0 55px rgba(244,223,0,.025),0 0 0 110px rgba(244,223,0,.02);pointer-events:none}
+.hero>div:first-child{position:relative;z-index:2}.hero .eyebrow{color:#f4df00}.hero h1{color:#fff;max-width:820px}.hero .lead{color:#d0d7d2;max-width:720px}.hero .btn.primary{background:#f4df00;border-color:#f4df00;color:#151815;box-shadow:0 12px 28px rgba(244,223,0,.16)}.hero .btn.primary:hover{background:#ffe91b}.hero .btn.ghost{color:#fff;border-color:#3f4742;background:rgba(255,255,255,.03)}
+.hero-note{border-color:rgba(244,223,0,.16);background:rgba(244,223,0,.055)}.hero-note .ic{background:#f4df00;color:#111}.hero-note p{color:#ccd4cf}.hero-note p b{color:#fff}
+.visual{border-color:rgba(244,223,0,.16);background:radial-gradient(circle at 50% 45%,rgba(244,223,0,.08),transparent 32%),linear-gradient(145deg,#151b17,#0c100e);box-shadow:0 26px 70px rgba(0,0,0,.28)}
+.visual:before{background-image:linear-gradient(rgba(244,223,0,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(244,223,0,.04) 1px,transparent 1px)}
+.visual .label{border-color:rgba(244,223,0,.25);color:#fff6a8;background:rgba(15,18,16,.7)}
+.network-svg .link{stroke:#4d5751}.network-svg .pulse{stroke:#f4df00}.network-svg .node{fill:#111713;stroke:#4a554f}.network-svg .node.core{fill:#272a15;stroke:#f4df00}.network-svg .node.hot{fill:#20251e;stroke:#d8ca25}.network-svg text{fill:#e6ebe8}.network-svg .tiny{fill:#89938d}.hero-caption{border-color:rgba(244,223,0,.18);background:rgba(8,10,9,.72);color:#aeb8b2}.hero-caption b{color:#fff}
+.science-ribbon{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;margin:18px 0 14px}.science-panel{position:relative;min-height:150px;border-radius:18px;border:1px solid #dce0d9;background:#fff;box-shadow:var(--shadow-sm);overflow:hidden}.science-panel .cap{position:absolute;left:18px;top:16px;font-size:9px;text-transform:uppercase;letter-spacing:.14em;color:#7a817d;font-weight:900}.science-panel .big{position:absolute;left:18px;bottom:20px;font-size:22px;font-weight:900;letter-spacing:-.03em}.science-panel .big small{display:block;font-size:10px;font-weight:700;letter-spacing:0;color:#707873;margin-top:6px}.spectral{position:absolute;inset:0}.sample-strip{display:flex;align-items:flex-end;justify-content:flex-end;gap:8px;padding:30px 22px 22px 120px;height:100%}.sample-strip i{display:block;width:20px;border-radius:9px 9px 4px 4px;background:linear-gradient(180deg,#f4df00,#b9aa00);box-shadow:inset 0 -10px 15px rgba(0,0,0,.06)}.sample-strip i:nth-child(1){height:34px}.sample-strip i:nth-child(2){height:52px}.sample-strip i:nth-child(3){height:76px}.sample-strip i:nth-child(4){height:48px}.sample-strip i:nth-child(5){height:64px}.sample-strip i:nth-child(6){height:92px}.sample-strip i:nth-child(7){height:58px}.sample-strip i:nth-child(8){height:82px}
+.metrics{gap:14px;margin-top:14px}.metric{background:#fff;border-color:#dde1db;box-shadow:var(--shadow-sm);min-height:132px}.metric:before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:#f4df00}.metric:after{border-color:rgba(0,0,0,.04)}.metric .mini{color:#6e7671}.metric b{color:#171a18}.metric span{color:#747d77}
+.section{border-top:1px solid #dde1db}.sectionhead p{color:#6d7670}.section:nth-of-type(even){position:relative}
+.flow-wrap,.chart-card,.card,.signal,.side,.progress-card,.question,.step,details{background:#fff;border-color:#dce1da;box-shadow:var(--shadow-sm)}
+.flow .node{background:linear-gradient(180deg,#fff,#f7f8f5);border-color:#dbe0da;color:#171a18}.flow .node span{color:#7b847e}.flow .node:not(:last-child):after{color:#b0b6b1}.flow .node.hl{border-color:#d9c800;box-shadow:inset 0 0 0 1px rgba(244,223,0,.2)}
+.chart-card h3,.signal h3,.item h3,.unknown h3,.question>b,.step b,summary{color:#171a18}.chart-note,.barrow span,.side-head span,.why,.small,.step span,.detail-body{color:#78817b}.track{background:#eceeea;border-color:#e1e4df}.fill{background:linear-gradient(90deg,#dfcc00,#f4df00)}.barrow b{color:#313632}.donut{background:conic-gradient(#f4df00 0 64%,#707b75 64% 82%,#e5e8e3 82% 100%)}.donut:after{background:#fff;border-color:#e0e4de}.legend div{color:#707873}.swatch.a{background:#f4df00}.swatch.b{background:#707b75}.swatch.c{background:#e5e8e3}
+.tag.good{color:#5e5a00;border-color:#d9ca35;background:#fffbea}.tag.open{color:#7f6811;background:#fff8dd;border-color:#eadc9a}.tag.stop{color:#9c403b;background:#fff0ef;border-color:#e5aaa6}
+.signal{min-height:214px}.signal p{color:#6f7973}.signal .num{color:#eff1ed}.signal .pulse-dot{background:#f4df00;box-shadow:0 0 0 6px rgba(244,223,0,.12),0 0 24px rgba(244,223,0,.18)}.signal:after{background:linear-gradient(90deg,#f4df00,rgba(244,223,0,.05))}
+.side-head{background:#f8f9f6;border-color:#e0e4de}.item{border-color:#eceee9}.item p{color:#69736d}.side.good{box-shadow:inset 4px 0 0 #f4df00,var(--shadow-sm)}.side.rejected{box-shadow:inset 4px 0 0 #b8564f,var(--shadow-sm)}
+.unknown{background:#fffdf1;border:1px solid #eadf97;box-shadow:var(--shadow-sm)}.unknown .q{color:#7f7300}.unknown p{color:#6b756f}
+.ring{background:conic-gradient(#f4df00 0 var(--deg),#e6e9e4 var(--deg) 360deg)}.ring:after{background:#fff;border-color:#e1e4df}.progress-card p{color:#6d7670}.pl{border-color:#eceee9;color:#737b76}.pl b{color:#222725}.question{margin-bottom:14px}.btn{border-color:#c9cec8;color:#252a27;background:#fff}.btn:hover{border-color:#aeb5b0}.btn.primary{background:#f4df00;color:#161914;border-color:#e2cf00;box-shadow:0 7px 18px rgba(200,180,0,.13)}.btn.ghost{background:#fff}.result{background:#fafbf8;border-color:#e0e4de;color:#626d66}
+.step{background:#fff}.step:not(:last-child):after{color:#b3b9b4}.stepnum{color:#8b938e}.callout{border-color:#ddd36e;background:#fffbea;color:#555c57}.callout b{color:#171a18}
+details{background:#fff}summary:after{color:#908300}.footer{border-color:#dce1da;color:#78817b}
+.section{scroll-margin-top:78px}
+@media(max-width:1080px){.hero{padding:38px 30px}.science-ribbon{grid-template-columns:1fr}.sample-strip{padding-left:140px}}
+@media(max-width:680px){.hero{border-radius:20px;padding:30px 20px}.science-panel{min-height:130px}.sample-strip{padding-left:110px}.sample-strip i{width:16px}.metric{min-height:118px}}
+
+
+/* RC25 FINISH PASS */
+.quicknav{display:none}.section{position:relative}.section:before{position:absolute;right:0;top:48px;font-size:72px;font-weight:900;letter-spacing:-.08em;color:rgba(18,23,20,.035);pointer-events:none}.section#model:before{content:"01"}.section#signals:before{content:"02"}.section#findings:before{content:"03"}.section#unknowns:before{content:"04"}.section#validate:before{content:"05"}.section#boundary:before{content:"06"}.section#evidence:before{content:"07"}
+.metric,.signal,.chart-card,.side,.unknown,.question,.step,details,.science-panel{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.metric:hover,.signal:hover,.chart-card:hover,.unknown:hover,.science-panel:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(25,31,27,.10);border-color:#cfd5ce}.signal:hover{border-color:#ded36a}
+.sectionhead{position:relative;padding-right:78px}.sectionhead:after{content:"";position:absolute;left:0;bottom:-12px;width:48px;height:3px;border-radius:99px;background:#f4df00}
+.hero-actions .btn{min-width:150px;text-align:center}.hero h1{font-size:clamp(48px,6vw,88px)}
+.metrics .metric:nth-child(1):before,.metrics .metric:nth-child(4):before{background:#f4df00}.metrics .metric:nth-child(2):before{background:#222}.metrics .metric:nth-child(3):before{background:#8b948e}
+.footer{position:relative;margin-top:16px;padding-top:34px}.footer:before{content:"";position:absolute;left:0;top:-1px;width:120px;height:3px;background:#f4df00}
+@media(max-width:1080px){.quicknav{display:flex;position:sticky;top:60px;z-index:35;overflow:auto;gap:6px;padding:8px 14px;background:rgba(250,251,248,.94);border-bottom:1px solid #e0e4de;backdrop-filter:blur(15px);scrollbar-width:none}.quicknav::-webkit-scrollbar{display:none}.quicknav a{white-space:nowrap;text-decoration:none;font-size:10px;font-weight:800;color:#626a65;padding:7px 10px;border-radius:999px;border:1px solid #dfe3dd;background:#fff}.quicknav a:first-child{background:#f4df00;color:#171a18;border-color:#e5d100}.section:before{font-size:54px;top:36px}.sectionhead{padding-right:60px}}
+@media(max-width:680px){.quicknav{top:60px}.section:before{font-size:42px;top:28px}.sectionhead{padding-right:48px}.hero h1{font-size:42px}.hero-note{align-items:flex-start}.science-ribbon{margin-top:12px}.section{padding:34px 0 40px}.sectionhead:after{bottom:-9px}}
+
+</style>
+
+<style id="rc25-polish">
+:root{
+ --agat-yellow:#f2d316;--agat-yellow-soft:#fff3a0;--charcoal:#111412;--charcoal-2:#1b201d;
+ --paper:#f5f4ee;--paper-2:#ebe9df;--ink-dark:#141815;--muted-dark:#5d6862;--line-light:#d9d8cf;
+}
+body{background:linear-gradient(180deg,#0b0d0c 0 680px,var(--paper) 680px 100%);}
+.sidebar{background:linear-gradient(180deg,#0d100f,#111512);border-right:1px solid rgba(242,211,22,.18)}
+.brandmark{border-color:rgba(242,211,22,.38);background:rgba(242,211,22,.06)}
+.brandmark b,.eyebrow{color:var(--agat-yellow)}
+.sidebar a:before,.live-dot{background:var(--agat-yellow);box-shadow:0 0 16px rgba(242,211,22,.42)}
+.sidebar a:hover,.sidebar a.active{background:rgba(242,211,22,.06);border-color:rgba(242,211,22,.12)}
+.side-status{border-color:rgba(242,211,22,.16);background:rgba(242,211,22,.035)}
+.topbar{background:rgba(12,15,13,.88);border-color:rgba(242,211,22,.14)}
+.chip{border-color:rgba(242,211,22,.26);color:#f8efaf;background:rgba(242,211,22,.06)}
+.wrap{padding-top:22px}
+.hero{min-height:620px;position:relative}
+.hero:before{content:"";position:absolute;left:-42px;right:-42px;top:-22px;height:1px;background:linear-gradient(90deg,transparent,rgba(242,211,22,.55),transparent)}
+h1{max-width:760px}.lead{color:#d5dbd6}
+.hero-kicker{display:flex;align-items:center;gap:8px;margin-top:16px;color:#aab3ae;font-size:11px}
+.hero-kicker i{width:34px;height:1px;background:var(--agat-yellow);display:inline-block}
+.btn.primary{background:var(--agat-yellow);color:#15160d;border-color:#ffeb54;box-shadow:0 12px 34px rgba(242,211,22,.16)}
+.btn.primary:hover{background:#ffe52c}
+.btn.ghost{border-color:#39413d;background:rgba(255,255,255,.025)}
+.hero-note{border-color:rgba(242,211,22,.18);background:linear-gradient(180deg,rgba(242,211,22,.055),rgba(242,211,22,.018))}
+.hero-note .ic{background:rgba(242,211,22,.12);color:var(--agat-yellow)}
+.visual{border-color:rgba(242,211,22,.22);background:radial-gradient(circle at 51% 45%,rgba(242,211,22,.09),transparent 31%),linear-gradient(145deg,#17201b,#0b100d 72%);box-shadow:0 35px 90px rgba(0,0,0,.42)}
+.visual:before{background-image:linear-gradient(rgba(242,211,22,.032) 1px,transparent 1px),linear-gradient(90deg,rgba(242,211,22,.032) 1px,transparent 1px)}
+.visual:after{content:"";position:absolute;width:290px;height:290px;border-radius:50%;right:-90px;top:-90px;border:1px solid rgba(242,211,22,.10);box-shadow:0 0 0 30px rgba(242,211,22,.015),0 0 0 68px rgba(242,211,22,.012)}
+.visual .label{border-color:rgba(242,211,22,.24);color:#fff4a6}
+.network-svg .pulse{stroke:var(--agat-yellow)}.network-svg .node.core{stroke:var(--agat-yellow);fill:#282514}.network-svg .node.hot{stroke:#d8c54f}.network-svg .link{stroke:#65706a}.network-svg text{fill:#d5dcd7}.network-svg .tiny{fill:#919b95}
+.hero-caption{border-color:rgba(242,211,22,.14);background:rgba(10,12,11,.74)}
+.metrics{margin-top:28px}.metric{border-color:rgba(242,211,22,.16);background:linear-gradient(180deg,#171b18,#101311);box-shadow:0 16px 42px rgba(0,0,0,.24)}
+.metric:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--agat-yellow),transparent 80%)}
+.metric .mini{color:#a4aca7}.metric b{color:#fff}.metric span{color:#98a29c}
+.section{border-top:1px solid var(--line-light);color:var(--ink-dark)}
+.sectionhead p{color:var(--muted-dark)}
+.section .eyebrow{color:#8a7600}
+.section h2,.section h3{color:var(--ink-dark)}
+.card,.flow-wrap,.chart-card,.signal,.side,.unknown,.progress-card,.question,details,.step{background:#fff;border-color:#deddd4;box-shadow:0 12px 28px rgba(36,39,36,.06)}
+.card p,.signal p,.unknown p,.question p,.detail-body,.side .item p{color:#5f6a64}
+.tag{border-color:#d5d5cb;color:#5c6661;background:#faf9f4}.tag.good{color:#6a5d00;border-color:#e4d366;background:#fffceb}.tag.open{color:#8b6200;border-color:#e7c977;background:#fff9e9}.tag.stop{color:#954c47;border-color:#e1b5b2;background:#fff6f5}
+.flow-wrap{background:linear-gradient(180deg,#fff,#f7f6f0)}.flow .node{background:#fbfaf6;border-color:#dddcd4}.flow .node.hl{border-color:#d7c333;box-shadow:inset 0 0 0 1px rgba(242,211,22,.13),0 8px 22px rgba(36,39,36,.04)}.flow .node:not(:last-child):after{color:#b5aa61}.flow .node span{color:#7b8580}
+.chart-card{background:#fff}.track{background:#ecebe4;border-color:#dfded6}.fill{background:linear-gradient(90deg,#b79e00,var(--agat-yellow))}.barrow span,.chart-note{color:#68736d}
+.signal{position:relative;overflow:hidden}.signal:before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:linear-gradient(90deg,var(--agat-yellow),transparent)}.signal .num{color:#b49d00}.pulse-dot{background:var(--agat-yellow);box-shadow:0 0 0 6px rgba(242,211,22,.12)}
+.side.good{border-top:3px solid #b7a20c}.side.rejected{border-top:3px solid #b7bbb8}.side-head{border-bottom-color:#e3e2da}.side-head span{background:#f0efe8;color:#626d67}.side .item{border-bottom-color:#ecebe5}.why{background:#f7f5e9;border-left-color:#d3bd23;color:#6b6650}
+.unknown{background:linear-gradient(180deg,#fff,#fbfaf5)}.unknown .q{color:#8f7a00}
+.progress-card{background:linear-gradient(180deg,#161a17,#111411);color:#fff;border-color:#2c302e}.progress-card p{color:#b7bdb9}.ring{background:conic-gradient(var(--agat-yellow) var(--pct,0%),#303630 0);box-shadow:inset 0 0 0 10px #151917}.ring:after{background:#151917}.progress-lines{border-top-color:#2b312d}.pl{border-bottom-color:#2b312d}.pl span{color:#aeb6b1}.pl b{color:#fff0a0}
+.question{transition:.18s}.question:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(36,39,36,.09)}
+.result{background:#f7f6ef;border-color:#dddcd4;color:#535e58}.result b{color:#1e2421}
+.timeline{position:relative}.timeline:before{content:"";position:absolute;top:34px;left:7%;right:7%;height:2px;background:linear-gradient(90deg,#d0c45e,#dfdfd8)}.step{position:relative;z-index:1}.stepnum{color:#8b7700}.step b{color:#202622}.step span{color:#69736e}
+.callout{background:#151816;border-color:#2a302c;color:#cbd1cd}.callout b{color:#fff0a2}
+details{background:#fff}summary{color:#1c221f}.detail-body{border-top-color:#ecebe4}
+.footer{color:#717b75;border-top-color:#d9d8d0}
+.quicknav{background:rgba(15,18,16,.96);border-bottom-color:rgba(242,211,22,.13)}.quicknav a{color:#bec4c0}.quicknav a:hover,.quicknav a.active{color:#fff3a0;border-color:rgba(242,211,22,.35);background:rgba(242,211,22,.06)}
+/* premium editorial micro-details */
+.sectionhead{position:relative;padding-left:18px}.sectionhead:before{content:"";position:absolute;left:0;top:4px;width:3px;height:42px;border-radius:3px;background:var(--agat-yellow)}
+.section-number{font-size:58px;line-height:.8;font-weight:900;letter-spacing:-.08em;color:#dfddd2;position:absolute;right:0;top:-6px;pointer-events:none;user-select:none}
+.data-ribbon{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:0 0 38px}.data-pill{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;border:1px solid rgba(242,211,22,.14);background:rgba(255,255,255,.025);color:#b9c2bd}.data-pill i{width:8px;height:8px;border-radius:50%;background:var(--agat-yellow);box-shadow:0 0 14px rgba(242,211,22,.38)}.data-pill b{color:#fff;font-size:11px}.data-pill span{font-size:10px}
+@media(max-width:980px){body{background:linear-gradient(180deg,#0b0d0c 0 560px,var(--paper) 560px 100%)}.data-ribbon{grid-template-columns:1fr}.section-number{display:none}}
+</style>
+
+<style id="rc26-cycle1">
+:root{--agat-yellow:#f4df00;--black:#0b0d0c;--paper:#f7f6f1;--paper2:#eceae2;--text:#171a18;--muted2:#66706a}
+body{background:linear-gradient(180deg,#090b0a 0 720px,var(--paper) 720px 100%)}
+.topbar{height:72px}.wrap{max-width:1380px}
+.hero{min-height:690px;gap:56px}.hero h1{font-size:clamp(54px,6.6vw,92px);max-width:820px}.hero .lead{font-size:20px;max-width:820px}
+.hero-copy{position:relative;z-index:2}.hero-copy:after{content:"";display:block;width:110px;height:5px;margin-top:26px;background:linear-gradient(90deg,var(--agat-yellow),transparent);border-radius:5px}
+.visual{min-height:530px;border-radius:30px;background:radial-gradient(circle at 58% 38%,rgba(244,223,0,.15),transparent 24%),linear-gradient(150deg,#151a17,#0a0d0b 74%)}
+.visual .label{font-weight:800}.hero-caption{font-size:11px;line-height:1.45}
+.metric{min-height:126px;border-radius:18px}.metric b{font-size:36px}.metrics{gap:14px}
+.section{padding:58px 0}.section h2{font-size:clamp(34px,3.6vw,50px)}
+.sectionhead{margin-bottom:28px;align-items:center}.sectionhead p{font-size:14px;line-height:1.6}
+.card,.flow-wrap,.chart-card,.signal,.side,.unknown,.question,details,.step{border-radius:18px}
+.signal{min-height:215px}.signal h3{font-size:18px}.signal p{font-size:13px}
+.card h3,.unknown h3{font-size:18px}
+.flow .node{min-height:104px}.flow .node b{font-size:12px}
+.chart-card{padding:24px}.chart-card h3{font-size:18px}
+.side-head{padding:19px 20px}.item{padding:20px}
+.question{padding:24px}.question>b{font-size:18px;line-height:1.35;display:block;max-width:850px}
+.options{margin-top:14px}.options .btn{min-width:120px}
+/* original scientific motif: not AGAT artwork */
+.science-band{margin:18px 0 46px;border-radius:18px;overflow:hidden;border:1px solid rgba(244,223,0,.16);background:#111412;display:grid;grid-template-columns:1.15fr .85fr;min-height:148px}
+.science-copy{padding:22px 24px}.science-copy .k{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#f4df00;font-weight:900}.science-copy b{display:block;margin-top:8px;font-size:20px;color:#fff}.science-copy p{margin-top:6px;color:#aeb7b2;font-size:12px;max-width:560px}
+.spectrum{position:relative;min-height:148px;background:linear-gradient(90deg,rgba(244,223,0,.02),rgba(244,223,0,.07))}.spectrum svg{position:absolute;inset:0;width:100%;height:100%}.spectrum .grid{stroke:rgba(255,255,255,.06);stroke-width:1}.spectrum .trace{fill:none;stroke:#f4df00;stroke-width:2}.spectrum .trace2{fill:none;stroke:#8a918d;stroke-width:1.2;opacity:.65}
+@media(max-width:980px){body{background:linear-gradient(180deg,#090b0a 0 640px,var(--paper) 640px 100%)}.hero{min-height:auto}.science-band{grid-template-columns:1fr}.spectrum{min-height:120px}}
+</style>
+
+<style id="rc27-cycle2">
+.reading-progress{position:fixed;left:268px;right:0;top:68px;height:3px;background:rgba(255,255,255,.04);z-index:80}.reading-progress i{display:block;height:100%;width:0;background:var(--agat-yellow);box-shadow:0 0 14px rgba(244,223,0,.45)}
+.focus-card{outline:2px solid rgba(244,223,0,.45)!important;box-shadow:0 18px 42px rgba(41,38,0,.11)!important;transform:translateY(-2px)}
+.flow .node,.signal,.unknown,.metric,.card{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}.flow .node:hover,.signal:hover,.unknown:hover,.metric:hover,.card:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(29,31,29,.09);border-color:#d2c55b}
+.quicknav a{transition:.15s}.quicknav a.active{color:#111;background:var(--agat-yellow);border-color:var(--agat-yellow)}
+details[open]{border-color:#d9c746;box-shadow:0 10px 28px rgba(40,38,0,.06)}
+summary{cursor:pointer}.item{transition:background .15s}.item:hover{background:#fffdf2}
+.validation-dock{position:sticky;bottom:14px;z-index:35;margin:28px auto 0;max-width:860px;padding:10px 12px;border-radius:16px;background:rgba(16,18,16,.94);backdrop-filter:blur(14px);border:1px solid rgba(244,223,0,.2);display:flex;align-items:center;justify-content:space-between;gap:14px;box-shadow:0 20px 60px rgba(0,0,0,.24)}
+.validation-dock span{font-size:11px;color:#aeb7b2}.validation-dock b{color:#fff}.validation-dock .btn{padding:9px 12px}
+@media(max-width:760px){.reading-progress{left:0;top:0}.validation-dock{bottom:8px;border-radius:14px}.validation-dock span{display:none}}
+</style>
+
+<style id="rc28-cycle3">
+/* Final editorial pass: calmer density, sharper hierarchy, premium finish */
+body{letter-spacing:-.005em}.topbar{border-bottom-color:rgba(244,223,0,.22)}
+.sidebar{box-shadow:12px 0 34px rgba(0,0,0,.16)}
+.hero{padding-top:58px}.eyebrow{font-size:9px}.hero-actions .btn{padding:12px 16px;border-radius:12px}
+.metrics{position:relative}.metrics:after{content:"";position:absolute;left:0;right:0;bottom:-18px;height:1px;background:linear-gradient(90deg,transparent,#d8d5c8 12%,#d8d5c8 88%,transparent)}
+.metric .mini{font-weight:800}.metric span{line-height:1.35}
+.sectionhead:before{height:52px}.section-number{font-size:72px;color:#e5e2d6}
+.section{scroll-margin-top:120px}.card,.signal,.unknown,.chart-card,.flow-wrap,.side,.question{box-shadow:0 10px 28px rgba(30,32,30,.045)}
+.signal .num{font-size:48px;color:#ded8ad}.unknown .q{font-size:24px;font-weight:900;line-height:1;color:#a48d00;margin-bottom:8px}
+.side.good{border-top-color:#c3aa00}.side.rejected{border-top-color:#868d89}.why{border-radius:0 10px 10px 0}
+.flow-wrap::-webkit-scrollbar{height:8px}.flow-wrap::-webkit-scrollbar-thumb{background:#c8c5b9;border-radius:999px}.flow-wrap::-webkit-scrollbar-track{background:#f1efe7}
+.question{border-left:4px solid #e4d44a}.question .options{gap:8px}.question .btn{background:#fff;border-color:#cfcfc6;color:#343a36}.question .btn:hover{border-color:#b8a000;background:#fffceb}.question .btn.primary{background:var(--agat-yellow);color:#16170e;border-color:#d6c100}
+.result{border-left:4px solid #d3bd23;border-radius:12px}.progress-card{border-top:3px solid var(--agat-yellow)}
+.evidence-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0 0}.evidence-strip div{padding:10px 12px;border-radius:10px;background:#f3f1e8;border:1px solid #e1dfd5}.evidence-strip b{display:block;font-size:11px;color:#1b201d}.evidence-strip span{font-size:9px;color:#727b76}
+.footer{padding-bottom:40px}
+@media(max-width:980px){.evidence-strip{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.hero h1{font-size:48px}.hero .lead{font-size:17px}.metrics{grid-template-columns:1fr 1fr}.evidence-strip{grid-template-columns:1fr}.section{padding:44px 0}.question>b{font-size:16px}.options{display:grid;grid-template-columns:1fr 1fr}.options .btn{min-width:0;width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="reading-progress" aria-hidden="true"><i id="readProgress"></i></div><div class="app">
+<aside class="sidebar">
+ <div class="brand-row"><div class="brandmark"><b>K</b></div><div class="brand-copy"><b>KEEPER</b><span>Enterprise assessment</span></div></div>
+ <nav>
+  <a href="#overview" class="active">Overview</a><a href="#model">Operating model</a><a href="#signals">Change signals</a><a href="#findings">Findings</a><a href="#unknowns">Unknowns</a><a href="#validate">Validation</a><a href="#boundary">Decision boundary</a><a href="#evidence">Evidence notes</a>
+ </nav>
+ <div class="side-status"><div class="row"><span>Public reconstruction</span><b>Complete</b></div><div class="row"><span>Challenge pass</span><b>Complete</b></div><div class="row"><span>Executive validation</span><b id="railCount">0/3</b></div></div>
+ <div class="foot">External rehearsal only. No implementation authority. No private AGAT information used.</div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="top-left"><b>Keeper × AGAT</b><span class="chip">Executive assessment</span></div><div class="top-right"><span class="live-dot"></span><span>Public model ready for validation</span></div></header><nav class="quicknav" aria-label="Quick navigation"><a href="#overview">Overview</a><a href="#model">Model</a><a href="#signals">Change</a><a href="#findings">Findings</a><a href="#unknowns">Unknowns</a><a href="#validate">Validate</a><a href="#evidence">Evidence</a></nav>
+<div class="wrap">
+<section class="hero" id="overview">
+ <div>
+  <div class="eyebrow">External enterprise reconstruction</div>
+  <h1>See the company before changing the company.</h1>
+  <p class="lead">Keeper starts with what can already be established, challenges the obvious conclusions, and only asks for help where the outside view reaches a real limit.</p>
+  <div class="evidence-strip" aria-label="Assessment design principles"><div><b>Public first</b><span>Use what can already be established.</span></div><div><b>Minimum ask</b><span>Only ask what changes the model.</span></div><div><b>Evidence stays visible</b><span>Known, unknown and rejected stay separate.</span></div><div><b>No forced project</b><span>No change is a valid result.</span></div></div>
+<div class="hero-actions"><a class="btn primary" href="#validate">Review the 3 questions</a><a class="btn ghost" href="#model">Explore the model</a></div>
+  <div class="hero-note"><div class="ic">✓</div><p><b>No transformation pitch.</b> The current public evidence does not justify saying AGAT needs one system, has a silo problem, or should replace working tools.</p></div>
+ </div>
+ <div class="visual" aria-label="AGAT operating relationship map">
+  <div class="label">Relationship map</div>
+  <svg class="network-svg" viewBox="0 0 600 480" role="img" aria-label="AGAT operating relationship map">
+   <line class="link" x1="300" y1="240" x2="122" y2="96"/><line class="link" x1="300" y1="240" x2="470" y2="106"/><line class="link" x1="300" y1="240" x2="106" y2="332"/><line class="link" x1="300" y1="240" x2="494" y2="334"/><line class="link" x1="300" y1="240" x2="300" y2="80"/><line class="link" x1="300" y1="240" x2="300" y2="402"/>
+   <line class="pulse" x1="122" y1="96" x2="470" y2="106"/><line class="pulse" x1="106" y1="332" x2="494" y2="334"/><line class="pulse" x1="300" y1="80" x2="300" y2="402"/>
+   <circle class="node core" cx="300" cy="240" r="55"/><text x="300" y="236" text-anchor="middle">AGAT</text><text class="tiny" x="300" y="252" text-anchor="middle">Operating model</text>
+   <circle class="node hot" cx="122" cy="96" r="43"/><text x="122" y="93" text-anchor="middle">Clients</text><text class="tiny" x="122" y="107" text-anchor="middle">49k+ public claim</text>
+   <circle class="node" cx="470" cy="106" r="43"/><text x="470" y="103" text-anchor="middle">Portals</text><text class="tiny" x="470" y="117" text-anchor="middle">Specialized</text>
+   <circle class="node" cx="106" cy="332" r="43"/><text x="106" y="329" text-anchor="middle">Labs</text><text class="tiny" x="106" y="343" text-anchor="middle">Distributed</text>
+   <circle class="node" cx="494" cy="334" r="43"/><text x="494" y="331" text-anchor="middle">Quality</text><text class="tiny" x="494" y="345" text-anchor="middle">Scope-specific</text>
+   <circle class="node" cx="300" cy="80" r="41"/><text x="300" y="77" text-anchor="middle">People</text><text class="tiny" x="300" y="91" text-anchor="middle">Roles + capability</text>
+   <circle class="node" cx="300" cy="402" r="41"/><text x="300" y="399" text-anchor="middle">Change</text><text class="tiny" x="300" y="413" text-anchor="middle">Modernization</text>
+  </svg>
+  <div class="hero-caption"><b>What this visual means:</b> public information shows a distributed, specialized operating environment. It does not show whether that complexity is harmful.</div>
+ </div>
+</section>
+<div class="science-ribbon" aria-label="Scientific evidence visualization">
+ <div class="science-panel">
+  <div class="cap">Evidence signal</div>
+  <svg class="spectral" viewBox="0 0 900 180" preserveAspectRatio="none" aria-hidden="true">
+   <defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4df00" stop-opacity=".28"/><stop offset="1" stop-color="#f4df00" stop-opacity="0"/></linearGradient></defs>
+   <path d="M0 142 C70 142 72 108 118 108 S165 136 205 122 268 54 313 78 355 139 405 120 468 92 515 109 562 145 612 132 676 44 724 70 776 140 900 118 L900 180 L0 180 Z" fill="url(#area)"/>
+   <path d="M0 142 C70 142 72 108 118 108 S165 136 205 122 268 54 313 78 355 139 405 120 468 92 515 109 562 145 612 132 676 44 724 70 776 140 900 118" fill="none" stroke="#c6b500" stroke-width="3"/>
+   <g fill="#f4df00"><circle cx="118" cy="108" r="4"/><circle cx="313" cy="78" r="4"/><circle cx="515" cy="109" r="4"/><circle cx="724" cy="70" r="4"/></g>
+  </svg>
+  <div class="big">Public evidence first<small>Use the signal before asking for more access.</small></div>
+ </div>
+ <div class="science-panel">
+  <div class="cap">Assessment lens</div>
+  <div class="sample-strip" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="big">3 questions left<small>Only material unknowns reach the CEO.</small></div>
+ </div>
+</div>
+<div class="metrics">
+ <div class="metric"><div class="mini">Public footprint</div><b>41</b><span>North American locations publicly described by AGAT</span></div>
+ <div class="metric"><div class="mini">Client scale</div><b>49k+</b><span>Worldwide clients referenced publicly</span></div>
+ <div class="metric"><div class="mini">Client portals</div><b>6</b><span>Specialized client-facing portal families identified</span></div>
+ <div class="metric"><div class="mini">Material questions</div><b>3</b><span>Items left for executive validation after challenge</span></div>
+</div>
+<div class="science-band" aria-label="Assessment signal"><div class="science-copy"><span class="k">Keeper signal</span><b>Precise where the evidence is strong. Quiet where it is not.</b><p>The assessment separates what can be established from the outside from what only AGAT can validate.</p></div><div class="spectrum"><svg viewBox="0 0 520 150" preserveAspectRatio="none"><path class="grid" d="M0 30H520M0 60H520M0 90H520M0 120H520"/><path class="trace2" d="M0 88 C45 92 55 62 96 72 S160 96 190 56 S250 78 280 72 S345 96 380 50 S445 72 520 58"/><path class="trace" d="M0 102 C35 104 55 100 82 100 L98 99 L110 72 L121 112 L136 87 L151 100 C190 101 210 98 240 99 L252 95 L261 52 L270 118 L282 84 L294 99 C330 100 350 96 372 98 L385 94 L398 66 L410 109 L422 90 L438 98 C470 100 492 98 520 99"/></svg></div></div>
+<section class="section" id="model">
+ <div class="sectionhead"><div class="section-number">01</div><div><div class="eyebrow">Operating model</div><h2>What Keeper can already see</h2></div><p>The goal is not to map every department. It is to understand how a client need becomes trusted work, evidence and delivery.</p></div>
+ <div class="flow-wrap"><div class="flow">
+  <div class="node hl"><b>Client need</b><span>Requirement enters</span></div><div class="node"><b>Commercial</b><span>Scope + commitment</span></div><div class="node"><b>Service / location</b><span>Capability selected</span></div><div class="node"><b>Sample / custody</b><span>Work enters execution</span></div><div class="node"><b>Method + equipment</b><span>Technical execution</span></div><div class="node"><b>Quality / review</b><span>Evidence challenged</span></div><div class="node"><b>Result / report</b><span>Output released</span></div><div class="node hl"><b>Client</b><span>Trusted result returned</span></div>
+ </div></div>
+ <div class="chart-grid" style="margin-top:14px">
+  <div class="chart-card"><h3>Public evidence coverage</h3><div class="bars">
+   <div class="barrow"><span>Company footprint</span><div class="track"><div class="fill" style="width:92%"></div></div><b>High</b></div>
+   <div class="barrow"><span>Client experience</span><div class="track"><div class="fill" style="width:78%"></div></div><b>Good</b></div>
+   <div class="barrow"><span>Digital change</span><div class="track"><div class="fill" style="width:72%"></div></div><b>Good</b></div>
+   <div class="barrow"><span>Internal handoffs</span><div class="track"><div class="fill" style="width:28%"></div></div><b>Low</b></div>
+   <div class="barrow"><span>Decision rights</span><div class="track"><div class="fill" style="width:22%"></div></div><b>Low</b></div>
+  </div><div class="chart-note">Relative evidence depth only. Not a performance score.</div></div>
+  <div class="chart-card"><h3>Current confidence mix</h3><div class="donut-wrap"><div class="donut"><b>64%</b></div><div class="legend"><div><span class="swatch a"></span>Supported publicly</div><div><span class="swatch b"></span>Needs validation</div><div><span class="swatch c"></span>Intentionally unknown</div></div></div><div class="chart-note">Confidence refers to the reconstruction, not AGAT performance.</div></div>
+ </div>
+</section>
+<section class="section" id="signals">
+ <div class="sectionhead"><div class="section-number">02</div><div><div class="eyebrow">Change signals</div><h2>Where AGAT is already moving</h2></div><p>These are not findings. They are useful control specimens because they show how AGAT already changes and improves.</p></div>
+ <div class="signals">
+  <div class="signal"><div class="num">01</div><div class="pulse-dot"></div><span class="tag good">Digital workflow</span><h3>ECOC + WebEARTH</h3><p>The enhanced ECOC replaced a spreadsheet workflow and involved LIMS, Digital Services and Client Services.</p></div>
+  <div class="signal"><div class="num">02</div><div class="pulse-dot"></div><span class="tag good">Client information</span><h3>Report redesign</h3><p>AGAT changed report presentation to improve navigation and readability for clients working under tight timelines.</p></div>
+  <div class="signal"><div class="num">03</div><div class="pulse-dot"></div><span class="tag good">Operating model</span><h3>Operational Improvement</h3><p>A role explicitly focused on workflow, responsibility clarity and client experience was added in Environmental Prairies.</p></div>
+  <div class="signal"><div class="num">04</div><div class="pulse-dot"></div><span class="tag good">Assurance</span><h3>Safety consistency</h3><p>A health and safety leadership role was added with responsibility for consistent practices across laboratories and operations.</p></div>
+ </div>
+</section>
+<section class="section" id="findings">
+ <div class="sectionhead"><div class="section-number">03</div><div><div class="eyebrow">Challenge result</div><h2>What survived—and what did not</h2></div><p>Keeper tried the obvious conclusions first. Most were rejected. What remains is narrower and more useful.</p></div>
+ <div class="split">
+  <div class="side good"><div class="side-head"><b>Worth validating</b><span>3 items</span></div>
+   <div class="item"><h3>Change propagation</h3><p>How does one important change move through affected teams, systems, methods, readiness checks and client-facing execution?</p><div class="why">Why it matters: AGAT is already changing in several different areas.</div></div>
+   <div class="item"><h3>One client across specialized businesses</h3><p>How does AGAT maintain a coherent client relationship and trusted information when several specialized businesses are involved?</p><div class="why">Why it matters: specialization is visible; harmful fragmentation is not.</div></div>
+   <div class="item"><h3>Capability readiness</h3><p>How does AGAT prove a new capability is ready before it is offered to clients?</p><div class="why">Why it matters: location-specific methods and licensing are visible publicly.</div></div>
+  </div>
+  <div class="side rejected"><div class="side-head"><b>Rejected by the evidence</b><span>3 assumptions</span></div>
+   <div class="item"><h3>“AGAT has a silo problem”</h3><p>Not supported. Specialization and distributed authority may be intentional strengths.</p></div>
+   <div class="item"><h3>“AGAT needs one system”</h3><p>Not supported. Public evidence shows specialized tools and active integration work, not proof of harmful fragmentation.</p></div>
+   <div class="item"><h3>“Keeper should replace AGAT systems”</h3><p>Rejected. Any Keeper role would exist only where a validated information or coordination need is proven.</p></div>
+  </div>
+ </div>
+</section>
+<section class="section" id="unknowns">
+ <div class="sectionhead"><div class="section-number">04</div><div><div class="eyebrow">Truth boundary</div><h2>What cannot be known from the outside</h2></div><p>An honest unknown is more useful than a polished assumption.</p></div>
+ <div class="unknowns">
+  <div class="unknown"><div class="q">Unknown 01</div><h3>Internal system handoffs</h3><p>Whether information is re-entered, reconciled or manually translated after client submission or between internal systems.</p></div>
+  <div class="unknown"><div class="q">Unknown 02</div><h3>Readiness proof</h3><p>How methods, people, equipment, quality controls and approvals are linked when a capability changes.</p></div>
+  <div class="unknown"><div class="q">Unknown 03</div><h3>Change ownership</h3><p>How ownership is maintained when one change crosses commercial, client service, laboratory, digital, quality, safety or geographic boundaries.</p></div>
+ </div>
+</section>
+<section class="section" id="validate">
+ <div class="sectionhead"><div class="section-number">05</div><div><div class="eyebrow">Executive validation</div><h2>Three answers can materially improve the model</h2></div><p>The assessment is designed to correct the reconstruction with the least possible demand on executive attention.</p></div>
+ <div class="validation">
+  <aside class="progress-card"><div class="ring" id="ring"><b id="ringText">0/3</b></div><p>Only three material states need validation before Keeper knows whether anything deserves a closer look.</p><div class="progress-lines"><div class="pl"><span>Public reconstruction</span><b>Done</b></div><div class="pl"><span>Challenge pass</span><b>Done</b></div><div class="pl"><span>Executive validation</span><b id="pcount">0/3</b></div></div></aside>
+  <div><div id="questions"></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" id="save">Export validation</button><button class="btn ghost" id="reset">Reset answers</button></div><div id="validationSummary" class="result">No validation answers recorded yet.</div></div>
+ </div>
+</section>
+<div class="validation-dock"><span><b>Executive validation</b> · 3 answers can materially improve the model.</span><a class="btn primary" href="#validate">Go to validation</a></div>
+<section class="section" id="boundary">
+ <div class="sectionhead"><div class="section-number">06</div><div><div class="eyebrow">Decision boundary</div><h2>What happens after validation</h2></div><p>Validation does not authorize a project. It determines whether there is anything worth investigating further.</p></div>
+ <div class="timeline"><div class="step"><div class="stepnum">Step 01</div><b>PUBLIC</b><span>External reconstruction</span></div><div class="step"><div class="stepnum">Step 02</div><b>VALIDATE</b><span>Correct the smallest material states</span></div><div class="step"><div class="stepnum">Step 03</div><b>TRACE</b><span>Follow only what survives</span></div><div class="step"><div class="stepnum">Step 04</div><b>DETERMINE</b><span>Working well, explained, unknown or material</span></div><div class="step"><div class="stepnum">Step 05</div><b>HUMAN DECISION</b><span>Stop, investigate or authorize design</span></div></div>
+ <div class="callout"><b>Keeper's job ends before authority begins.</b><br>If AGAT's current arrangements are working well, that is a successful assessment. If a material pattern survives, the next step is a bounded investigation—not automatic implementation.</div>
+</section>
+<section class="section" id="evidence">
+ <div class="sectionhead"><div class="section-number">07</div><div><div class="eyebrow">Evidence notes</div><h2>What the public model is built from</h2></div><p>These notes help explain the reconstruction without forcing every source detail into the main assessment.</p></div>
+ <div class="details-grid">
+  <details><summary>Public company footprint</summary><div class="detail-body">AGAT publicly describes a 41-location North American network and roughly 49,000 clients worldwide. These figures are used only as scale/context indicators.</div></details>
+  <details><summary>Client-facing digital tools</summary><div class="detail-body">Public material exposes multiple specialized client portal families, including WebEARTH, WebAIR, WebOAS, WebFLUIDS, WebMINING and WebFOOD. Their existence does not establish duplication.</div></details>
+  <details><summary>Quality and accreditation</summary><div class="detail-body">Public accreditation material indicates location/test-specific scopes. This is why capability readiness is treated as a material question rather than assumed centrally.</div></details>
+  <details><summary>Digital modernization</summary><div class="detail-body">The enhanced ECOC is a strong public example of a workflow being modernized across several functions rather than evidence that a broad transformation is needed.</div></details>
+  <details><summary>Operating improvement</summary><div class="detail-body">Recent public role announcements show active attention to workflow, responsibility clarity, client experience and consistency. These are treated as existing strengths/signals, not problems.</div></details>
+  <details><summary>Current limit</summary><div class="detail-body">Keeper has no internal AGAT data, credentials, system access or private records. Internal handoffs, decision rights and readiness mechanisms remain intentionally unresolved until validated.</div></details>
+ </div>
+</section>
+<div class="footer">Keeper × AGAT · Executive assessment rehearsal · Public evidence dated through 22 September 2026. This artifact is not an AGAT system, audit, certification, or implementation recommendation.</div>
+</div>
+</main>
+</div>
+<script>
+const Q=[
+{id:'change',q:'When an important change crosses several AGAT teams, is there normally one clear way to see what it affects and whether each affected area is ready?',opts:['Yes','Mostly','No','Depends on the change','Not sure']},
+{id:'client',q:'Across AGAT’s specialized businesses, is the current way of coordinating one client’s relationship and information working as intended?',opts:['Yes','Mostly','No','Depends on the client','Not sure']},
+{id:'readiness',q:'When a new capability is introduced at a location, is there already a clear way to prove the method, people, equipment, quality controls and approvals are ready before client use?',opts:['Yes','Mostly','No','It varies by capability','A specialist should answer']}
+];
+let A={};try{A=JSON.parse(localStorage.getItem('keeper-agat-rc25')||'{}')}catch(e){A={}}
+function render(){
+ const box=document.getElementById('questions');
+ box.innerHTML=Q.map((x,i)=>`<div class="question"><b>${i+1}. ${x.q}</b><div class="options">${x.opts.map(o=>`<button class="btn ${A[x.id]===o?'primary':''}" data-id="${x.id}" data-a="${o}">${o}</button>`).join('')}</div></div>`).join('');
+ document.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{A[b.dataset.id]=b.dataset.a;try{localStorage.setItem('keeper-agat-rc25',JSON.stringify(A))}catch(e){}render()});
+ summary();
+}
+function summary(){
+ const n=Object.keys(A).length,el=document.getElementById('validationSummary');
+ document.getElementById('pcount').textContent=n+'/3';document.getElementById('railCount').textContent=n+'/3';document.getElementById('ringText').textContent=n+'/3';document.getElementById('ring').style.setProperty('--deg',(n/3*360)+'deg');
+ if(!n){el.textContent='No validation answers recorded yet.';return}
+ let parts=[];if(A.change)parts.push('Change propagation: '+A.change);if(A.client)parts.push('Cross-business client coordination: '+A.client);if(A.readiness)parts.push('Capability readiness: '+A.readiness);
+ el.innerHTML='<b>'+n+' of 3 material states validated.</b><br>'+parts.join(' · ')+'<br><span class="small">These answers correct the model. They do not create an implementation recommendation.</span>';
+}
+document.getElementById('reset').onclick=()=>{A={};try{localStorage.removeItem('keeper-agat-rc25')}catch(e){}render()};
+document.getElementById('save').onclick=()=>{const data={artifact:'Keeper AGAT Executive Assessment RC25',date:'2026-09-22',answers:A,boundary:'Validation only; no implementation authority'};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Keeper_AGAT_RC25_Validation.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)};
+const links=[...document.querySelectorAll('.sidebar a')];const sections=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-30% 0px -60% 0px',threshold:0});sections.forEach(s=>observer.observe(s));}
+render();
+</script>
+
+<script id="rc25-interactions">
+(function(){
+ const links=[...document.querySelectorAll('.sidebar a[href^="#"],.quicknav a[href^="#"]')];
+ const sections=[...document.querySelectorAll('section[id]')];
+ const update=()=>{
+   let current=sections[0]?.id;
+   const y=window.scrollY+130;
+   for(const s of sections){if(s.offsetTop<=y) current=s.id;}
+   links.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));
+ };
+ addEventListener('scroll',update,{passive:true}); update();
+ document.querySelectorAll('.card,.signal,.unknown,.question,.step,.chart-card').forEach(el=>{
+   el.addEventListener('mouseenter',()=>el.style.willChange='transform');
+   el.addEventListener('mouseleave',()=>el.style.willChange='auto');
+ });
+})();
+</script>
+
+<script id="rc27-behavior">
+(function(){
+ const bar=document.getElementById('readProgress');
+ const nav=[...document.querySelectorAll('.quicknav a,.sidebar nav a')];
+ const sections=[...document.querySelectorAll('section[id]')];
+ function update(){
+   const d=document.documentElement; const max=d.scrollHeight-d.clientHeight;
+   if(bar) bar.style.width=(max?Math.min(100,(d.scrollTop/max)*100):0)+'%';
+   let current=sections[0]?.id; const y=window.scrollY+130;
+   sections.forEach(s=>{if(s.offsetTop<=y) current=s.id});
+   nav.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+current));
+ }
+ addEventListener('scroll',update,{passive:true}); update();
+ document.querySelectorAll('.flow .node,.signal,.unknown').forEach(el=>{el.addEventListener('click',()=>{el.classList.toggle('focus-card')})});
+})();
+</script>
+</body>
+</html>
